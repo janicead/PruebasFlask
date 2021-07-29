@@ -57,3 +57,32 @@ def test_con_parametro_letra_que_no_es_letra():
     assert resp.json == {
         'error': 'El parámetro letra no es una letra'
     }
+
+
+def test_encuentra_personaje_solicitado():
+    with app.test_client() as client:
+        resp = client.get("/disney?nombre=.GIFfany")
+
+    assert resp.status_code == 200
+    assert resp.json == {
+        "enemies": [],
+        "films": [],
+        "nombre": ".GIFfany"
+    }
+
+
+def test_no_envio_nombre_personaje():
+    with app.test_client() as client:
+        resp = client.get("/disney")
+    assert resp.status_code == 400
+    assert resp.json == {
+        "error": "No se envio el nombre del personaje"
+    }
+
+def test_personaje_no_existe_en_base_de_datos():
+    with app.test_client() as client:
+        resp = client.get("/disney?nombre=Rufus")
+    assert resp.status_code == 400
+    assert resp.json == {
+        "error": "El personaje solicitado no se encuentra en la base de datos"
+    }
