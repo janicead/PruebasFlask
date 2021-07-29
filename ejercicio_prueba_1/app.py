@@ -1,0 +1,30 @@
+from flask import Flask, request, make_response
+
+app = Flask(__name__)
+
+
+def error(error_dict, status=400):
+    return make_response(error_dict, status)
+
+
+@app.route('/contar')
+def contar():
+    """Se usa: /contar?oracion=hola&letra=b   (querystring)"""
+    oracion = request.args.get('oracion')
+    letra = request.args.get('letra')
+    if oracion is None:
+        return error({'error': 'La oración no fue ingresada'})
+    if letra is None:
+        return error({'error': 'La letra no fue ingresada'})
+    if not letra.isalpha():
+        return error({'error': 'El parámetro letra no es una letra'})
+
+    repeticiones = oracion.count(letra)
+    return {
+        'letra': letra,
+        'oracion': oracion,
+        'repeticiones': repeticiones
+    }
+
+if __name__ == '__main__':
+    app.run()
