@@ -13,6 +13,6 @@ dist/
 build/
 *.egg-info/
 
-venv/
-.idea/
-__pycache__/
+**/venv
+**/.idea
+**/__pycache__
