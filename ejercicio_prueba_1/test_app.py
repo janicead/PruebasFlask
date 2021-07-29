@@ -67,7 +67,8 @@ def test_encuentra_personaje_solicitado():
     assert resp.json == {
         "enemies": [],
         "films": [],
-        "nombre": ".GIFfany"
+        "nombre": ".GIFfany",
+        "tvShows": ["Gravity Falls"],
     }
 
 

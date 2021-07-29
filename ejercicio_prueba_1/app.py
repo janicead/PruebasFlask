@@ -42,6 +42,7 @@ def personajes_disney():
                 "nombre": element["name"],
                 "enemies": element["enemies"],
                 "films": element["films"],
+                "tvShows": element ["tvShows"],
             }
     return error({"error": "El personaje solicitado no se encuentra en la base de datos"})
 
